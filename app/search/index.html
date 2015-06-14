@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bona-na-fide - Search</title>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <script src="assets/js/jquery2.min.js"></script>
+    <script src="assets/js/require.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+    $(document).on("pageload", function () {
+        if (!isNull(query.q)) {
+            $(".main-search input[type='text']").val(query.q);
+        }
+    });
+    </script>
+</head>
+<body>
+    <main>
+        <article class="search-page">
+            <h1>Search Results</h1>
+            <div class="main-search"><form action="app/search/">
+                <input type="text" placeholder="Search terms here" class="large main-search-box"  />
+                <button type="submit">Search</button>
+            </form></div>
+        </article>
+        <ul class="search-results">
+            <li>
+                <a href="app/db/banana">
+                    <img class="preview-img" src="assets/img/logo256.png" alt="Preview Icon" />
+                    <h3>Test Result</h3>
+                    <ul class="metadata">
+                        <li>
+                            <strong>Last Updated: </strong>
+                            <time datetime="2015-05-28 12:10:00">2015-05-28 12:10:00</time>
+                        </li>
+                    </ul>
+                    <div class="description"><p>
+                        This is where a run-down of what's in the page is located. Yay!
+                    </p></div>
+                </a>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>

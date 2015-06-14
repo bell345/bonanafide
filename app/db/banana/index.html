@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bona-na-fide - Banana</title>
+    <meta charset="utf-8" />
+    <base href="../../../" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <script src="assets/js/jquery2.min.js"></script>
+    <script src="assets/js/require.js"></script>
+    <script src="assets/js/app.js"></script>
+</head>
+<body class="item-page">
+    <main>
+        <section class="summary-block">
+            <div class="page-header">
+                <img src="assets/img/Bananas.jpg" alt="Bananas" />
+                <aside class="page-header-credit">Credit: <a href="http://commons.wikimedia.org">Wikimedia</a></aside>
+                <h1>Banana</h1>
+            </div>
+            <p>
+                The banana is an oblong yellow fruit with a unique shape, comfortable to hold in
+                the hand. The bright skin can be peeled off, revealing a yummy soft yellow flesh.
+                Bananas are enjoyed by many people worldwide.
+            </p>
+        </section>
+        <section class="nutrition-block">
+            <h2 class="section-header">Nutrition</h2>
+            <script>
+                $(document).on("pageload", function (e) {
+                    var baseData = {
+                        "energy": {"name": "Energy", "unit": "J",
+                            "value": 8700
+                        },
+                        "protein": {"name": "Protein", "unit": "g",
+                            "value": 50
+                        },
+                        "fat": {"name": "Fat", "unit": "g",
+                            "value": 75,
+                            "children": {
+                                "satfat": {"name": "Saturated fat", "unit": "g",
+                                    "value": 24
+                                }
+                            }
+                        },
+                        "carbs": {"name": "Carbohydrates", "unit": "g",
+                            "value": 322,
+                            "children": {
+                                "sugar": {"name": "Sugar", "unit": "g",
+                                    "value": 100
+                                }
+                            }
+                        },
+                        "potassium": {"name": "Potassium", "unit": "mg",
+                            "value": 3760
+                        },
+                        "vitaminc": {"name": "Vitamin C", "unit": "%DI",
+                            "value": 100
+                        },
+                        "vitaminb6": {"name": "Vitamin B6", "unit": "%DI",
+                            "value": 100
+                        }
+                    };
+                    var servingQuantity = 126 / 100;
+                    var hundredGramsData = {
+                        "energy": 372,
+                        "protein": 1.1,
+                        "fat": 0.3,
+                        "satfat": 0.1,
+                        "carbs": 23,
+                        "sugar": 12,
+                        "potassium": 358,
+                        "vitaminc": 14,
+                        "vitaminb6": 20
+                    };
+
+                    function recurseAndReturnUL(obj, attrToSet) {
+                        var ul = document.createElement("ul");
+                        for (var prop in obj) if (obj.hasOwnProperty(prop)) {
+                            var name = isNull(obj[prop].name) ? prop : obj[prop].name;
+
+                            if (!isNull(obj[prop].children)) name += ", total";
+                            if (!isNull(obj[prop].unit)) name += " ("+obj[prop].unit+")";
+                            name += ": ";
+
+                            var li = document.createElement("li");
+                            var label = document.createElement("label");
+                                label.setAttribute("for", prop+"-chart");
+                                label.textContent = name;
+                            li.appendChild(label);
+                            var meter = document.createElement("meter");
+                                meter.id = prop+"-chart";
+                                if (!isNull(obj[prop].unit)) meter.setAttribute("data-unit", obj[prop].unit);
+                                meter.setAttribute(attrToSet, obj[prop].value);
+                            li.appendChild(meter);
+                            if (!isNull(obj[prop].children)) {
+                                var childUL = recurseAndReturnUL(obj[prop].children, attrToSet);
+                                li.appendChild(childUL);
+                            }
+                            ul.appendChild(li);
+                        }
+                        return ul;
+                    }
+
+                    function applyDataSet(obj, factor) {
+                        if (isNaN(factor) || isNull(factor)) factor = 1;
+                        for (var prop in obj) if (obj.hasOwnProperty(prop)) {
+                            $("#"+prop+"-chart").val(parseFloat(obj[prop]) * factor);
+                        }
+                    }
+
+                    var barcharts = recurseAndReturnUL(baseData, "max");
+                    barcharts.className = "bar-charts";
+
+                    var sect = $("section.nutrition-block");
+                    sect[0].replaceChild(barcharts, sect.find("ul.bar-charts")[0]);
+
+                    applyDataSet(hundredGramsData, servingQuantity);
+
+                    $("#serving-count").on("input", function (e) {
+                        var val = parseInt($("#serving-count").val());
+                        $("#serving-count-span").text(val);
+                        applyDataSet(hundredGramsData, val * servingQuantity);
+                    });
+                    $("#select-serving").on("change", function (e) {
+                        var val = $("#select-serving").val();
+                        servingQuantity = parseFloat((parseFloat(val) / 100).toFixed(4));
+                        $("#serving-count").val("1");
+                        applyDataSet(hundredGramsData, servingQuantity);
+                    });
+                });
+            </script>
+            <aside class="control-row">
+                Based upon
+                <select id="select-serving">
+                    <option value="126" selected>126g (regular)</option>
+                    <option value="100">100g</option>
+                </select> serving and daily intake of 8700J adult diet
+            </aside>
+            <div class="control-row">
+                <p><em>How many servings: </em>
+                <span id="serving-count-span">1</span></p>
+                <input type="range" id="serving-count" min="1" max="20" value="1" />
+            </div>
+            <ul class="bar-charts">
+            </ul>
+        </section>
+        <section class="review-block">
+            <h2 class="section-header">What People Think</h2>
+            <div class="main-reviews">
+                <div class="total stars pc70">
+                    <div class="star star-1"></div>
+                    <div class="star star-2"></div>
+                    <div class="star star-3"></div>
+                    <div class="star star-4"></div>
+                    <div class="star star-5"></div>
+                </div>
+                <ul>
+                    <li>
+                        Nutrition:
+                        <div class="stars pc50">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="star star-4"></div>
+                            <div class="star star-5"></div>
+                        </div>
+                    </li>
+                    <li>
+                        Taste:
+                        <div class="stars pc90">
+                            <div class="star star-1"></div>
+                            <div class="star star-2"></div>
+                            <div class="star star-3"></div>
+                            <div class="star star-4"></div>
+                            <div class="star star-5"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="make-a-review">
+                <h3>Create A Review</h3>
+                <div class="mar-rate-total">
+                    <input type="range" min="0" max="10" value="5" />
+                </div>
+                <div class="mar-rate">
+                    Rate the following:
+                    <ul>
+                        <li>
+                            Nutrition:<br>
+                            <input type="range" min="0" max="10" value="5" />
+                        </li>
+                        <li>
+                            Taste:<br>
+                            <input type="range" min="0" max="10" value="5" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="control-row">
+                    <textarea width="80%" height="200" placeholder="Additional feedback..."></textarea>
+                </div>
+                <div class="control-row">
+                    <button class="major">Submit</button>
+                </div>
+            </div>
+        </section>
+        <section class="company-block">
+            <h2 class="section-header">Producers</h2>
+            <div class="left-half">
+                <h3>Local</h3>
+            </div>
+            <div class="right-half">
+                <h3>International</h3>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

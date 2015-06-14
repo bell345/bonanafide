@@ -1,0 +1,72 @@
+/* ============ */
+/*  NAVIGATION  */
+/* ============ */
+body {
+    min-height:100%;
+    background:linear-gradient(45deg, #555, #555 50%, #484848 50%, #484848 100%) 0 0 / 35px 35px fixed #555;
+}
+header {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    padding:6px 10%;
+    color:#eee;
+    z-index:9;
+    text-align:left;
+}
+header.top {
+    padding:6px 15%;
+}
+header::before {
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:linear-gradient(180deg, rgba(50, 50, 50, 0.7), rgba(50, 50, 50, 0.3));
+    transition:0.2s all;
+}
+header.top::before {
+    opacity:0;
+}
+header h1.title {
+    font-family:"Raleway" ,sans-serif;
+    font-size:22px;
+    padding-left:48px;
+    position:relative;
+    line-height:32px;
+    display:inline-block;
+}
+header h1.title::before {
+    content:"";
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    width:32px;
+    background:#555;
+}
+
+main {
+    background:#419cc3;
+    position:absolute;
+    left:0;
+    right:0;
+    width:75%;
+    margin:auto;
+    background:#f2f2f2;
+    color:#333;
+}
+main > section {
+    padding:14px 7%;
+    padding-top:24px;
+    box-shadow:0 6px 12px -4px #aaa;
+}
+main section.intro {
+    padding-top:56px;
+    background:linear-gradient(45deg, #49c, #4bc);
+    color:#eee;
+    animation:background-anim 4s infinite;
+}

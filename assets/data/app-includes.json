@@ -1,0 +1,10 @@
+{
+    "includes": [
+        {
+            "source": "assets/html/app-header.htm",
+            "insert": "body",
+            "replace": false,
+            "before": true
+        }
+    ]
+}
