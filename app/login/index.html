@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bona-na-fide - Login</title>
+    <meta charset="utf-8" />
+    <base href="../../" />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+    <script src="assets/js/jquery2.min.js"></script>
+    <script src="assets/js/require.js"></script>
+    <script src="assets/js/app.js"></script>
+</head>
+<body>
+    <main>
+        <div class="banner-logo"></div>
+        <h1>Login</h1>
+        <form action="app/" onsubmit="localStorage.setItem('logged-in', $('#username').val())" class="big-form">
+            <input type="text" id="username" placeholder="Username..." />
+            <input type="password" id="password" placeholder="Password..." />
+            <input type="submit" value="Submit" />
+            <div class="login-help">
+                <ul class="inline-list">
+                    <li><a href="#">Forgot your password?</a></li>
+                    <li><a href="#">Register with Bonanafide</a></li>
+                </ul>
+            </div>
+        </form>
+    </main>
+</body>
+</html>

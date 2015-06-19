@@ -35,6 +35,16 @@ $(function () {
                 event.preventDefault();
                 return false;
             });
+            if (!isNull(localStorage.getItem("logged-in")) && localStorage.getItem("logged-in") != false) {
+                var user = localStorage.getItem("logged-in");
+                $(".nav-login").hide();
+                $(".nav-register").hide();
+                $(".nav-logout").show();
+                $(".nav-user").show();
+                //$(".nav-user").css("background-image", "url('assets/img/pics/"+user+"_80x80.png')");
+                $(".nav-user a").attr("href", "profiles/"+user);
+                $(".nav-user a").text(user);
+            }
             /*$(document).scroll(function (e) {
                 var headers = $(".section-header");
                 var currFixed = headers.toArray().indexOf($(".section-header.fixed")[0]);

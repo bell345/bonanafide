@@ -167,8 +167,10 @@ li:hover > .inner-nav, .sections .inner-nav {
 .nav-top { background-image:url(../res/icons/arrow.svg); }
 
 .nav-suggest { background-image:url(../res/icons/suggest.svg); }
-.nav-login { background-image:url(../res/icons/key.svg); }
+.nav-login, .nav-logout { background-image:url(../res/icons/key.svg); }
 .nav-register { background-image:url(../res/icons/menu2.svg); }
+.nav-user, .nav-logout { display:none; }
+.nav-user { background-image:url(../img/pics/default_80x80.png); }
 
 nav aside {
     position:absolute;
@@ -279,7 +281,6 @@ article {
 
 ul.search-results {
     list-style-type:none;
-    margin:0 15%;
 }
 ul.search-results > li {
     background:#fff;
@@ -405,6 +406,7 @@ article {
     height:300px;
     display:inline-block;
     font-size:28px;
+    vertical-align:top;
 }
 .landing-option * {
     font-size:32px;
@@ -478,4 +480,49 @@ textarea {
 }
 input[type="range"] {
     width:80%;
+}
+
+.banner-logo {
+    height:120px;
+    position:relative;
+}
+.banner-logo::before {
+    content:"";
+    height:120px;
+    width:120px;
+    display:inline-block;
+    background:url(../img/logo256.png) 0 0 / 120px 120px;
+}
+.banner-logo::after {
+    content:"Bonanafide";
+    font-family:"Righteous", "Arial", sans-serif;
+    font-size:52px;
+    line-height:120px;
+    left:24px;
+    position:relative;
+    vertical-align:top;
+}
+
+.big-form {
+    text-align:center;
+    width:80%;
+    margin:0 10%;
+}
+.big-form input {
+    display:inline-block;
+    font-size:18px;
+    padding:12px 18px;
+    margin:8px 14px;
+}
+.big-form input[type="submit"] {
+    width:80%;
+    margin:8px 10f%;
+}
+.inline-list {
+    list-style-type:none;
+}
+.inline-list li {
+    display:inline-block;
+    list-style-type:none;
+    margin:0 12px;
 }
